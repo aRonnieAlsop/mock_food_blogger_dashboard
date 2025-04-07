@@ -1,8 +1,8 @@
 .login-container {
     background-color: #1a1d1f;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    padding: 4.4rem;
+
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
   }
   
   .login-form {
@@ -12,23 +12,29 @@
   }
   
   .login-form h2 {
+    font-family: "Abril Fatface", serif;
+    font-weight: 400;
+    font-style: normal;
     color: white;
-    text-align: center;
+    font-size: 3rem;
   }
   
   .login-form input {
     padding: 0.75rem;
     border: none;
-    border-radius: 5px;
     font-size: 1rem;
+    font-family: 'Jost', sans-serif;
   }
   
   .login-form button {
-    background-color: #3f51b5;
+    font-family: "Abril Fatface", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: black;
+    font-size: 2.6rem;
+  }
+
+  .login-form button:hover {
     color: white;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
   }
   
