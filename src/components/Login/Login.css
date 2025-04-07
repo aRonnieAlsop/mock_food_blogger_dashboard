@@ -1,8 +1,9 @@
 .login-container {
-    background-color: #1a1d1f;
-    padding: 4.4rem;
-
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    background-color: #0b0d0e;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .login-form {
