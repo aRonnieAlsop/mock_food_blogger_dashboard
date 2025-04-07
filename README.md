@@ -4,7 +4,7 @@ This is a mock login system for a one-user blogging dashboard.
 
 ## 🔐 Login Credentials
 
-- **Username:** Orien  
+- **Username:** orion 
 - **Password:** 1234
 
 These credentials are stored in a `.env` file and are used to grant access to the dashboard. There is no real authentication in place—this is purely for mock/demo purposes.
