@@ -1,12 +1,21 @@
 .dashboard-container {
     background-color: #0b0d0e;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .recipe-maker-entrance {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 8rem;
+    border-radius: 6px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    border: black solid 1px;
 }
 
 .recipe-maker-entrance button {
@@ -15,22 +24,41 @@
     font-weight: 400;
     font-style: normal;
     font-size: 3rem;
-   
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
 }
 
 .recipe-maker-entrance button:hover {
     color: white;
 }
 
-.logout-button {
-    color: black;
+.recipe-index {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: white;
+    font-family: 'Abril Fatface', serif;
+    font-weight: 300;
+    font-size: 1.9rem;
+    padding: 1rem;
+}
+
+.recipe-index:hover {
+    color: rgb(58, 74, 58);
+}
+
+.logout {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: white;
+    background-color: none;
     font-family: 'Abril Fatface', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 2rem;
 }
 
-.logout-button:hover {
-    color: white;
+.logout:hover {
+    color: rgb(58, 74, 58);
 }
-
