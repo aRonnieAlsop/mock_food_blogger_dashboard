@@ -53,6 +53,30 @@ app.post('/recipes', (req, res) => {
     );
 });
 
+app.get('/recipes', (req, res) => {
+    db.all(`SELECT * FROM recipes`, [], (err, rows) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      const formatted = rows.map(recipe => ({
+        ...recipe,
+        ingredients: JSON.parse(recipe.ingredients),
+        steps: JSON.parse(recipe.steps)
+      }));
+      res.json(formatted);
+    });
+  });
+
+  app.delete('/recipes/:id', (req, res) => {
+    const id = req.params.id;
+    db.run(`DELETE FROM recipes WHERE id = ?`, id, function(err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ success: true, deletedId: id });
+    });
+  });
+  
+  
+
 app.listen(port, () => {
     console.log(`Server running on localhost:${port}`);
 });

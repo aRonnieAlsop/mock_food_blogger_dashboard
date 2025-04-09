@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Dashboard from './components/Dashboard/Dashboard';
 import RecipeForm from './components/RecipeForm/RecipeForm';
+import RecipeIndex from './components/RecipeIndex/RecipeIndex';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,6 +27,12 @@ function App() {
           path="/recipe-form"
           element={
             isLoggedIn ? <RecipeForm /> : <Navigate to="/" />
+          }
+        />
+           <Route
+          path="/recipes"
+          element={
+            isLoggedIn ? <RecipeIndex /> : <Navigate to="/" />
           }
         />
         {/* catch-all redirect */}

@@ -34,14 +34,19 @@
     position: absolute;
     top: 1rem;
     left: 1rem;
-    color: white;
-    font-family: 'Abril Fatface', serif;
-    font-weight: 300;
-    font-size: 1.9rem;
-    padding: 1rem;
 }
 
-.recipe-index:hover {
+.recipe-index button {
+    color: white;
+    background: none;
+    border: none;
+    font-family: 'Abril Fatface', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+.recipe-index button:hover {
     color: rgb(58, 74, 58);
 }
 

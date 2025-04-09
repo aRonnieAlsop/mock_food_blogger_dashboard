@@ -9,10 +9,14 @@ export default function Dashboard() {
   const handleNewRecipeClick = () => {
     navigate('/recipe-form');
   }
+
+  const handleRecipeIndexClick = () => {
+    navigate('/recipes');
+  }
   
   return (
     <div className="dashboard-container">
-        <div className="recipe-index">Recipe Index</div>
+        <div className="recipe-index"><button onClick={handleRecipeIndexClick}>Recipe Index</button></div>
         <div className="recipe-maker-entrance"><button onClick={handleNewRecipeClick}>
             Enter New Recipe
         </button>
