@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Recipe.css';
 
 const Recipe = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [recipe, setRecipe] = useState(null);
   
     useEffect(() => {
@@ -14,11 +15,30 @@ const Recipe = () => {
           setRecipe(found);
         });
     }, [id]);
+
+    const handleDelete = async () => {
+        if (!window.confirm('Are you sure you want to delete this recipe?')) return;
+    
+        try {
+          const res = await fetch(`http://localhost:4000/recipes/${id}`, {
+            method: 'DELETE'
+          });
+    
+          if (res.ok) {
+            navigate('/'); // ➡️ return to index of recipes
+          } else {
+            console.error('Failed to delete recipe.');
+          }
+        } catch (err) {
+          console.error('Error deleting recipe:', err);
+        }
+      };
   
     if (!recipe) return <p>Loading...</p>;
   
     return (
       <div className="recipe-detail-container">
+        <button className="delete-button" onClick={handleDelete}>Delete</button>
         <h1 className="recipe-title">{recipe.title}</h1>
         <p className="recipe-description">{recipe.description}</p>
         <p className="recipe-author"><strong>Author:</strong> {recipe.author}</p>

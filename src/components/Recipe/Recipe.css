@@ -4,69 +4,92 @@
     max-width: 800px;
     margin: 0 auto;
     border: solid black 1px;
-  }
-  
-  .recipe-title {
+    position: relative;
+}
+
+.delete-button {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1rem;
+    font-family: 'Abril Fatface', serif;
+    font-weight: 300;
+    letter-spacing: .6em;
+    border: none;
+    border-radius: 2px;
+    background-color: #0b0d0e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: white;
+    color: black;
+    border-bottom: solid rgb(221, 55, 55) 1px;
+}
+
+
+.recipe-title {
     font-size: 3rem;
     font-family: 'Abril Fatface', serif;
     margin-bottom: 0.5rem;
     border-bottom: solid black 1px;
-  }
-  
-  .recipe-description {
+}
+
+.recipe-description {
     font-size: 1.1rem;
     font-style: italic;
     margin-bottom: 1rem;
     color: #ccc;
-  }
-  
-  .recipe-author {
+}
+
+.recipe-author {
     margin-bottom: 2rem;
     font-size: 1.2rem;
-  }
-  
-  .recipe-time-boxes {
+}
+
+.recipe-time-boxes {
     display: flex;
     justify-content: center;
     align-items: stretch;
     border-bottom: 1px solid black;
     margin-bottom: 2rem;
-  }
-  
-  .time-title { 
+}
+
+.time-title {
     font-size: 1.2rem;
     font-weight: 500;
-  }
+}
 
-  .time-box {
+.time-box {
     padding: 1rem 3rem 0rem 2rem;
     margin: 0;
     text-align: center;
     border: none;
-  }
+}
 
-  .time-box + .time-box {
-    border-left: 1px solid black; 
-  }
+.time-box+.time-box {
+    border-left: 1px solid black;
+}
 
-  
-  .ingredients-list,
-  .steps-list {
+
+.ingredients-list,
+.steps-list {
     margin-left: 1.5rem;
     margin-bottom: 2rem;
-  }
-  
-  .ingredients-list li {
+}
+
+.ingredients-list li {
     list-style-type: disc;
-  }
-  
-  .steps-list li {
+}
+
+.steps-list li {
     list-style-type: decimal;
-  }
-  
-  .notes {
+}
+
+.notes {
     font-style: italic;
     color: #bbb;
     max-width: 600px;
-  }
-  
+}

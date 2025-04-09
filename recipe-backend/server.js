@@ -29,11 +29,14 @@ db.run(`
 app.post('/recipes', (req, res) => {
     const { title, author, description, prepTime, cookTime, ingredients, steps, notes } = req.body;
 
+    const createdAt = new Date().toISOString();
+
     const query = `
         INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
+        console.log('Saving recipe with date:', createdAt);
 
     db.run(
         query,
