@@ -1,18 +1,82 @@
 .recipes-list-container {
     background-color: #0b0d0e;
     min-height: 100vh;
-    display: flex;
     align-items: left;
     position: relative;
-    
 }
 
-.recipes-list-container h1 {
+.recipes-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 0;    
+    margin-bottom: 2rem;
+  }
+  
+  .recipes-header h1 {
     color: white;
     font-family: 'Abril Fatface', serif;
     font-weight: 300;
+    font-size: 3rem;
+    margin: 0;
+    padding: 0 2rem 0.4rem 2rem; 
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    background-color: #0b0d0e;
+    position: relative;
+    z-index: 2;
+  }
+
+  .recipes-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    z-index: 1; 
+  }
+  
+
+
+
+.recipes-list-container ul {
+    list-style-type: none;
+    padding-left: 0;
+
 }
 
-.recipes-list-container li {
+.recipes-list-container a {
+    text-decoration: none;
+    color: white;
+}
+
+
+.recipes-list-container ul {
+    list-style-type: none;
+    padding-left: 0;
+
+}
+
+.recipes-list-container a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Jost', serif;
+    font-weight: 300;
+    font-size: 1.9rem;
+}
+
+
+.recipes-list-container ul {
+    list-style-type: none;
+    padding-left: 0;
+
+}
+
+.recipes-list-container a {
+    text-decoration: none;
     color: white;
 }
