@@ -30,8 +30,8 @@ app.post('/recipes', (req, res) => {
     const { title, author, description, prepTime, cookTime, ingredients, steps, notes } = req.body;
 
     const query = `
-        INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
 
@@ -45,7 +45,8 @@ app.post('/recipes', (req, res) => {
             cookTime,
             JSON.stringify(ingredients),
             JSON.stringify(steps),
-            notes
+            notes,
+            createdAt
         ],
         function (err) {
             if (err) return res.status(500).json({ error: err.message });

@@ -20,11 +20,20 @@ const RecipeIndex = () => {
                 <h1>Recipes</h1>
             </div>
             <ul>
-                {recipes.map((recipe) => (
-                    <li key={recipe.id}>
-                        <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
-                    </li>
-                ))}
+                {recipes.map((recipe) => {
+                    const createdAt = new Date(recipe.created_at);
+                    const formattedDate = `${createdAt.getDate().toString().padStart(2, '0')}.${(createdAt.getMonth() + 1).toString().padStart(2, '0')}.${createdAt.getFullYear()}`;
+
+                    return (
+                        <li key={recipe.id} className="recipe-item">
+                            <Link to={`/recipes/${recipe.id}`} className="recipe-link">
+                                <span className="title">{recipe.title}</span>
+                                <span className="date">{formattedDate}</span>
+                            </Link>
+                        </li>
+                    );
+                })}
+
             </ul>
         </div>
 
