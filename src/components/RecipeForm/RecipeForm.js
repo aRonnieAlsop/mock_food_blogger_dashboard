@@ -9,11 +9,10 @@ export default function RecipeForm() {
         { amount: '', measurement: 'cup', name: '' }
     ]);
     const [steps, setSteps] = useState(['']);
-    const [submitted, setSubmitted] = useState(false);
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
     const [notes, setNotes] = useState('');
-
+    const [submitted, setSubmitted] = useState(false);
     const [prepTime, setPrepTime] = useState('');
     const [cookTime, setCookTime] = useState('');
 
@@ -38,22 +37,35 @@ export default function RecipeForm() {
         setSteps(updated);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Recipe submitted:', {
-            title,
-            author,
-            description,
-            prepTime,
-            cookTime,
-            ingredients,
-            steps,
-            notes
-        });
-
-
-        setSubmitted(true);
-    };
+      
+        const recipe = {
+          title,
+          author,
+          description,
+          prepTime,
+          cookTime,
+          ingredients,
+          steps,
+          notes
+        };
+      
+        try {
+          const res = await fetch('http://localhost:4000/recipes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(recipe)
+          });
+      
+          const data = await res.json();
+          console.log('Saved to DB:', data);
+          setSubmitted(true);
+        } catch (err) {
+          console.error('Failed to save recipe:', err);
+        }
+      };
+      
 
     return (
         <div className="recipe-form-container">
