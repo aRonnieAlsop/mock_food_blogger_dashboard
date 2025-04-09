@@ -1,1 +1,113 @@
+.recipe-form-container {
+  background-color: #0b0d0e;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Abril Fatface', serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.recipe-card {
+  background-color: white;
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: black;
+}
+
+.recipe-card h2,
+.recipe-card h3,
+.recipe-card label {
+  font-weight: normal;
+}
+
+.recipe-card h3 {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid black;
+}
+
+.recipe-card h2:first-of-type {
+  margin-bottom: 1rem;
+}
+
+.recipe-card label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+input,
+textarea,
+select {
+  font-family: 'Abril Fatface', serif;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.time-inputs {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.time-input {
+  max-width: 150px;
+}
+
+.ingredient-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ingredient-amount {
+  width: 80px;
+}
+
+.ingredient-measurement {
+  width: 120px;
+}
+
+.ingredient-name {
+  flex: 1;
+}
+
+.step-row {
+  margin-top: 1rem;
+}
+
+.step-row textarea {
+  height: 80px;
+}
+
+
+.recipe-form-button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-family: 'Abril Fatface', serif;
+  border: none;
+  border-radius: 8px;
+  background-color: #0b0d0e;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.recipe-form-button:hover {
+  background-color: #333;
+}
+
 

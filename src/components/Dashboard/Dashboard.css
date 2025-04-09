@@ -13,9 +13,9 @@
     align-items: center;
     background-color: rgba(255, 255, 255, 0.05);
     padding: 8rem;
-    border-radius: 6px;
+    border-radius: 1px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-    border: black solid 1px;
+    border: white solid 1px;
 }
 
 .recipe-maker-entrance button {
