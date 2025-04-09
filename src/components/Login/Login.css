@@ -38,4 +38,8 @@
   .login-form button:hover {
     color: white;
   }
+
+  .name-input, .password-input {
+    border-radius: 1px;
+  }
   

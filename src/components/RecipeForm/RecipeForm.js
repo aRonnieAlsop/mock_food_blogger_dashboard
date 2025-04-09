@@ -168,17 +168,15 @@ export default function RecipeForm() {
                     placeholder="Optional notes, substitutions, or personal tips."
                     className="notes-input"
                 />
+                <div className="upload-area">
+                    <h3>Upload an Image</h3>
+                    <input type="file" accept="image/*" />
+                </div>
 
 
                 <button type="submit" className="recipe-form-button">Submit Recipe</button>
             </form>
 
-            {submitted && (
-                <div className="upload-area">
-                    <h3>Upload an Image</h3>
-                    <input type="file" accept="image/*" />
-                </div>
-            )}
         </div>
     );
 }

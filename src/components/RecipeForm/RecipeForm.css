@@ -47,7 +47,7 @@ select {
   font-size: 1rem;
   padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 1px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -99,7 +99,7 @@ textarea {
   font-size: 1rem;
   font-family: 'Abril Fatface', serif;
   border: none;
-  border-radius: 8px;
+  border-radius: 2px;
   background-color: #0b0d0e;
   color: white;
   cursor: pointer;
@@ -107,7 +107,13 @@ textarea {
 }
 
 .recipe-form-button:hover {
-  background-color: #333;
+  background-color: black;
+  color: rgb(34, 32, 32);
 }
 
+.upload-area {
+  margin-top: 1rem;
+  border-radius: 1px;
+  color: #0b0d0e;
+}
 
