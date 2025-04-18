@@ -13,6 +13,11 @@ export default function Dashboard() {
   const handleRecipeIndexClick = () => {
     navigate('/recipes');
   }
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  }
   
   return (
     <div className="dashboard-container">
@@ -22,7 +27,7 @@ export default function Dashboard() {
         </button>
         
         </div>
-        <div className="logout">LOGOUT</div>
+        <div className="logout"><button onClick={handleLogoutClick}>LOGOUT</button></div>
     </div>
   );
 }

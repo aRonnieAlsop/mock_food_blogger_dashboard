@@ -5,16 +5,25 @@ export default function Login({ onLogin }) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      userName === process.env.REACT_APP_USERNAME &&
-      password === process.env.REACT_APP_PASSWORD
-    ) {
+
+    const response = await fakeLoginAPI(userName, password);
+ 
+    if (response.sucess) {
       onLogin();
     } else {
-      alert("Invalid credentials");
+      alert('Invalid credentials');
     }
+  };
+
+  const fakeLoginAPI = (username, password) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const isValid = username === 'admin' && password === 'password123';
+        resolve({ success: isValid });
+      }, 1000); // simulates a 1-second API delay
+    });
   };
   
 
