@@ -10,7 +10,7 @@ export default function Login({ onLogin }) {
 
     const response = await fakeLoginAPI(userName, password);
  
-    if (response.sucess) {
+    if (response.success) {
       onLogin();
     } else {
       alert('Invalid credentials');
