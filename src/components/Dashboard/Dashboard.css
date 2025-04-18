@@ -47,7 +47,7 @@
 }
 
 .recipe-index button:hover {
-    border: solid white 1px;
+    border-bottom: solid white 1px;
 }
 
 .logout {
@@ -64,6 +64,5 @@
 }
 
 .logout:hover {
-    color: black;
-    border: solid white 1px;
+    border-top: solid white 1px;
 }
