@@ -9,19 +9,29 @@ import Recipe from './components/Recipe/Recipe';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
+  };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/"
           element={
-            isLoggedIn ? <Navigate to="/dashboard" /> : <Login onLogin={() => setIsLoggedIn(true)} />
+            isLoggedIn ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />
           }
         />
         <Route
           path="/dashboard"
           element={
-            isLoggedIn ? <Dashboard /> : <Navigate to="/" />
+            isLoggedIn ? <Dashboard onLogout={handleLogout} /> : <Navigate to="/" />
           }
         />
         <Route

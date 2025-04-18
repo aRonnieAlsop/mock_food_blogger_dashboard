@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 
-export default function Dashboard() {
+export default function Dashboard({ onLogout }) {
   const navigate = useNavigate();
 
   const handleNewRecipeClick = () => {
@@ -15,7 +15,7 @@ export default function Dashboard() {
   }
 
   const handleLogoutClick = () => {
-    localStorage.removeItem('user');
+    onLogout();
     navigate('/');
   }
   
