@@ -47,7 +47,7 @@
 }
 
 .recipe-index button:hover {
-    color: rgb(58, 74, 58);
+    border: solid white 1px;
 }
 
 .logout {
@@ -64,5 +64,6 @@
 }
 
 .logout:hover {
-    color: rgb(58, 74, 58);
+    color: black;
+    border: solid white 1px;
 }
