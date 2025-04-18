@@ -39,33 +39,45 @@ export default function RecipeForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
+
         const recipe = {
-          title,
-          author,
-          description,
-          prepTime,
-          cookTime,
-          ingredients,
-          steps,
-          notes
+            title,
+            author,
+            description,
+            prepTime,
+            cookTime,
+            ingredients,
+            steps,
+            notes
         };
-      
+
         try {
-          const res = await fetch('http://localhost:4000/recipes', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(recipe)
-          });
-      
-          const data = await res.json();
-          console.log('Saved to DB:', data);
-          setSubmitted(true);
+            const res = await fetch('http://localhost:4000/recipes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(recipe)
+            });
+
+            const data = await res.json();
+            console.log('Saved to DB:', data);
+            setSubmitted(true);
         } catch (err) {
-          console.error('Failed to save recipe:', err);
+            console.error('Failed to save recipe:', err);
         }
-      };
-      
+    };
+
+    const closeModal = () => {
+        setSubmitted(false);
+        setTitle('');
+        setIngredients([{ amount: '', measurement: 'cup', name: '' }]);
+        setSteps(['']);
+        setAuthor('');
+        setDescription('');
+        setNotes('');
+        setPrepTime('');
+        setCookTime('');
+    };
+
 
     return (
         <div className="recipe-form-container">
@@ -188,6 +200,16 @@ export default function RecipeForm() {
 
                 <button type="submit" className="recipe-form-button">Submit Recipe</button>
             </form>
+
+
+            {submitted && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h3>Recipe Submitted Successfully!</h3>
+                        <button className="close-btn" onClick={closeModal}>X</button>
+                    </div>
+                </div>
+            )}
 
         </div>
     );
