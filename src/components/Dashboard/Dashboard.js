@@ -27,7 +27,7 @@ export default function Dashboard({ onLogout }) {
         </button>
         
         </div>
-        <div className="logout"><button onClick={handleLogoutClick}>LOGOUT</button></div>
+        <div><button onClick={handleLogoutClick} className="logout">LOGOUT</button></div>
     </div>
   );
 }

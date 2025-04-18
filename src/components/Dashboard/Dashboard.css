@@ -55,11 +55,12 @@
     bottom: 1rem;
     right: 1rem;
     color: white;
-    background-color: none;
+    background: none;
+    border: none;
     font-family: 'Abril Fatface', serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .logout:hover {
