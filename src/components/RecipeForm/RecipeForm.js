@@ -12,9 +12,10 @@ export default function RecipeForm() {
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
     const [notes, setNotes] = useState('');
-    const [submitted, setSubmitted] = useState(false);
     const [prepTime, setPrepTime] = useState('');
     const [cookTime, setCookTime] = useState('');
+    const [image, setImage] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
 
 
     const handleIngredientChange = (index, field, value) => {
@@ -37,30 +38,33 @@ export default function RecipeForm() {
         setSteps(updated);
     };
 
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const recipe = {
-            title,
-            author,
-            description,
-            prepTime,
-            cookTime,
-            ingredients,
-            steps,
-            notes
-        };
+        const formData = new FormData();
+        formData.append('image', image); 
+        formData.append('title', title);
+        formData.append('author', author);
+        formData.append('description', description);
+        formData.append('prepTime', prepTime);
+        formData.append('cookTime', cookTime);
+        formData.append('ingredients', JSON.stringify(ingredients)); 
+        formData.append('steps', JSON.stringify(steps)); 
+        formData.append('notes', notes);
 
         try {
             const res = await fetch('http://localhost:4000/recipes', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(recipe)
+                body: formData, 
             });
 
             const data = await res.json();
             console.log('Saved to DB:', data);
-            setSubmitted(true);
+            setSubmitted(true); 
         } catch (err) {
             console.error('Failed to save recipe:', err);
         }
@@ -76,6 +80,7 @@ export default function RecipeForm() {
         setNotes('');
         setPrepTime('');
         setCookTime('');
+        setImage(null);
     };
 
 
@@ -194,7 +199,7 @@ export default function RecipeForm() {
                 />
                 <div className="upload-area">
                     <h3>Upload an Image</h3>
-                    <input type="file" accept="image/*" />
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
                 </div>
 
 
