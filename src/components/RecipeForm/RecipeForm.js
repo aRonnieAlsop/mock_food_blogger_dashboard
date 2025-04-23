@@ -39,7 +39,7 @@ export default function RecipeForm() {
     };
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0]); /* storing the file in state */
     };
 
     const handleSubmit = async (e) => {
