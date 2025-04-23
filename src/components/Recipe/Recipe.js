@@ -12,6 +12,10 @@ const Recipe = () => {
         .then(res => res.json())
         .then(data => {
           const found = data.find((r) => r.id === parseInt(id));
+          if (found) {
+            found.ingredients = JSON.parse(found.ingredients);  
+            found.steps = JSON.parse(found.steps); 
+          }
           setRecipe(found);
         });
     }, [id]);
@@ -53,6 +57,13 @@ const Recipe = () => {
             <p>{recipe.cookTime} mins</p>
           </div>
         </div>
+
+        {/* Display Image */}
+        {recipe.image && (
+          <div className="recipe-image">
+            <img src={`http://localhost:4000/${recipe.image}`} alt={recipe.title} />
+          </div>
+        )}
   
         <h3>Ingredients</h3>
         <ul className="ingredients-list">
