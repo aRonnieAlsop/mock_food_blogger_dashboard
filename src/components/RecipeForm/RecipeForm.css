@@ -8,6 +8,24 @@
   align-items: flex-start;
 }
 
+.recipes-idx-link button {
+    color: white;
+    background: none;
+    border: none;
+    font-family: 'Abril Fatface', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.6rem;
+    margin-left: 0;
+    margin-right: 2em;
+}
+
+.recipes-idx-link button:hover {
+    color: rgb(40, 37, 37);
+    border-bottom: solid 1px white;
+}
+
+
 .recipe-card {
   background-color: white;
   width: 100%;

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RecipeForm.css';
 
 const US_MEASUREMENTS = ['cup', 'tablespoon', 'teaspoon', 'lb', 'oz', 'pinch', 'clove', 'slice', 'piece'];
 
 export default function RecipeForm() {
+    const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState([
         { amount: '', measurement: 'cup', name: '' }
@@ -16,6 +18,10 @@ export default function RecipeForm() {
     const [cookTime, setCookTime] = useState('');
     const [image, setImage] = useState(null);
     const [submitted, setSubmitted] = useState(false);
+
+    const handleRecipeIndexClick = () => {
+        navigate('/recipes');
+      }
 
 
     const handleIngredientChange = (index, field, value) => {
@@ -39,7 +45,7 @@ export default function RecipeForm() {
     };
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0]); /* storing the file in state */
+        setImage(e.target.files[0]); /* storing the file in state [in backend it creates an /uploads folder on your computer]*/
     };
 
     const handleSubmit = async (e) => {
@@ -86,6 +92,7 @@ export default function RecipeForm() {
 
     return (
         <div className="recipe-form-container">
+             <div className="recipes-idx-link"><button onClick={handleRecipeIndexClick}>Recipe Index</button></div>
             <form onSubmit={handleSubmit} className="recipe-card">
                 <h2>Recipe Title</h2>
                 <input
