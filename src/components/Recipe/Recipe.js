@@ -61,7 +61,7 @@ const Recipe = () => {
         {/* Display Image */}
         {recipe.image && (
           <div className="recipe-image">
-            <img src={`http://localhost:4000/${recipe.image}`} alt={recipe.title} />
+            <img src={`http://localhost:4000/${recipe.image.replace(/\\/g, '/')}`} alt={recipe.title} />
           </div>
         )}
   

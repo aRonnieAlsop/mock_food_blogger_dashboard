@@ -4,11 +4,16 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-
+const sharp = require('sharp');
 const app = express();
 const port = 4000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  methods: ['GET', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
+}));
+
 app.use(express.json());
 app.use(express.static('uploads'));  // Serve images from the 'uploads' folder
 
@@ -50,43 +55,85 @@ db.run(`
     )`
 );
 
-// POST endpoint for recipe submission (with image upload)
+// POST endpoint for recipe submission 
 app.post('/recipes', upload.single('image'), (req, res) => {
-    const { title, author, description, prepTime, cookTime, ingredients, steps, notes } = req.body;
-    const createdAt = new Date().toISOString();
+  const { title, author, description, prepTime, cookTime, ingredients, steps, notes } = req.body;
+  const createdAt = new Date().toISOString();
 
-    // Ensure we have an image or set imagePath to null if no image uploaded
-    const imagePath = req.file ? path.join('uploads', req.file.filename) : null;
+  
+  const imagePath = req.file ? path.join('uploads', req.file.filename) : null;
 
-    const query = `
-        INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+  if (imagePath) {
+      /* compress uploaded img w/ sharp*/
+      const compressedImagePath = path.join('uploads', 'compressed_' + req.file.filename);
 
-    console.log('Saving recipe with date:', createdAt);
+      sharp(req.file.path)
+          .resize(800)  
+          .toFile(compressedImagePath, (err, info) => {
+              if (err) {
+                  console.error('Error compressing image:', err);
+                  return res.status(500).json({ error: 'Failed to compress image', details: err.message });
+              }
 
-    db.run(
-        query,
-        [
-            title,
-            author,
-            description,
-            prepTime,
-            cookTime,
-            JSON.stringify(ingredients),
-            JSON.stringify(steps),
-            notes,
-            imagePath,
-            createdAt
-        ],
-        function (err) {
-            if (err) {
-                console.error('Error saving recipe:', err.message);
-                return res.status(500).json({ error: 'Failed to save recipe', details: err.message });
-            }
-            res.status(200).json({ message: 'Recipe saved successfully', id: this.lastID });
-        }
-    );
+              /* saved w/ compressed img path*/
+              const query = `
+                  INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+              `;
+
+              db.run(
+                  query,
+                  [
+                      title,
+                      author,
+                      description,
+                      prepTime,
+                      cookTime,
+                      JSON.stringify(ingredients),
+                      JSON.stringify(steps),
+                      notes,
+                      compressedImagePath, /* storing compressed img path */
+                      createdAt
+                  ],
+                  function (err) {
+                      if (err) {
+                          console.error('Error saving recipe:', err.message);
+                          return res.status(500).json({ error: 'Failed to save recipe', details: err.message });
+                      }
+                      res.status(200).json({ message: 'Recipe saved successfully', id: this.lastID });
+                  }
+              );
+          });
+  } else {
+      /* if no image uploaded, just save recipe w/out it */
+      const query = `
+          INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `;
+
+      db.run(
+          query,
+          [
+              title,
+              author,
+              description,
+              prepTime,
+              cookTime,
+              JSON.stringify(ingredients),
+              JSON.stringify(steps),
+              notes,
+              null, 
+              createdAt
+          ],
+          function (err) {
+              if (err) {
+                  console.error('Error saving recipe:', err.message);
+                  return res.status(500).json({ error: 'Failed to save recipe', details: err.message });
+              }
+              res.status(200).json({ message: 'Recipe saved successfully', id: this.lastID });
+          }
+      );
+  }
 });
 
 // GET endpoint for fetching all recipes
