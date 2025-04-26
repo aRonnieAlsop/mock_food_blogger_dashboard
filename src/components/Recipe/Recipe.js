@@ -39,7 +39,10 @@ const Recipe = () => {
       };
   
     if (!recipe) return <p>Loading...</p>;
-  
+
+    // Fix the image path by replacing backslashes with forward slashes
+    const imageURL = recipe.image ? `http://localhost:4000/${recipe.image.replace(/\\/g, '/')}` : null;
+
     return (
       <div className="recipe-detail-container">
         <button className="delete-button" onClick={handleDelete}>Delete</button>
@@ -59,9 +62,9 @@ const Recipe = () => {
         </div>
 
         {/* Display Image */}
-        {recipe.image && (
+        {imageURL && (
           <div className="recipe-image">
-            <img src={`http://localhost:4000/${recipe.image.replace(/\\/g, '/')}`} alt={recipe.title} />
+            <img src={imageURL} alt={recipe.title} />
           </div>
         )}
   
