@@ -39,8 +39,7 @@ const Recipe = () => {
       };
   
     if (!recipe) return <p>Loading...</p>;
-
-    // Fix the image path by replacing backslashes with forward slashes
+    /*⬇️ had problem with backward slashes when needing forward ⬇️*/
     const imageURL = recipe.image ? `http://localhost:4000/${recipe.image.replace(/\\/g, '/')}` : null;
 
     return (

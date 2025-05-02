@@ -22,7 +22,7 @@ const RecipeIndex = () => {
             <ul>
                 {recipes.map((recipe) => {
                     const createdAt = new Date(recipe.created_at);
-                    const formattedDate = `${createdAt.getDate().toString().padStart(2, '0')}.${(createdAt.getMonth() + 1).toString().padStart(2, '0')}.${createdAt.getFullYear()}`;
+                    const formattedDate = `${createdAt.getMonth().toString().padStart(2, '0')}.${(createdAt.getDate() + 1).toString().padStart(2, '0')}.${createdAt.getFullYear()}`;
 
                     return (
                         <li key={recipe.id} className="recipe-item">
