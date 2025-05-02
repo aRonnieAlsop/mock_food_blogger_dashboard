@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecipeForm.css';
 
-const US_MEASUREMENTS = ['cup', 'tablespoon', 'teaspoon', 'lb', 'oz', 'pinch', 'clove', 'slice', 'piece', 'head', ''];
+const US_MEASUREMENTS = ['cup', 'tablespoon', 'teaspoon', 'lb', 'oz', 'pinch', 'clove', 'slice', 'piece', 'head', 'can', ''];
 
 export default function RecipeForm() {
     const navigate = useNavigate();
