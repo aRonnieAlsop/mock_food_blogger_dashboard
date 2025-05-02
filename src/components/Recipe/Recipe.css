@@ -37,6 +37,7 @@
     border-bottom: solid black 1px;
 }
 
+
 .recipe-description {
     font-size: 1.1rem;
     font-style: italic;
@@ -93,3 +94,4 @@
     color: #bbb;
     max-width: 600px;
 }
+

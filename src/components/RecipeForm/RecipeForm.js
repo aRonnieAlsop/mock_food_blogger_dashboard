@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecipeForm.css';
 
-const US_MEASUREMENTS = ['cup', 'tablespoon', 'teaspoon', 'lb', 'oz', 'pinch', 'clove', 'slice', 'piece'];
+const US_MEASUREMENTS = ['cup', 'tablespoon', 'teaspoon', 'lb', 'oz', 'pinch', 'clove', 'slice', 'piece', 'head', ''];
 
 export default function RecipeForm() {
     const navigate = useNavigate();
@@ -161,7 +161,6 @@ export default function RecipeForm() {
                             onChange={(e) => handleIngredientChange(index, 'amount', e.target.value)}
                             placeholder="1/2"
                             className="ingredient-amount"
-                            required
                         />
                         <select
                             value={ingredient.measurement}
