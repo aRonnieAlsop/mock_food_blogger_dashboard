@@ -89,6 +89,7 @@ const Recipe = () => {
             <p className="notes">{recipe.notes}</p>
           </>
         )}
+        
       </div>
     );
 };
