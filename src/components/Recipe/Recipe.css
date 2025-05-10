@@ -74,6 +74,22 @@
     border-left: 1px solid black;
 }
 
+.recipe-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%; 
+    margin: 0 auto;
+    margin-bottom: 20px; 
+}
+
+.recipe-image img {
+    width: 100%;
+    height: auto; 
+    object-fit: contain; 
+}
+
+
 
 .ingredients-list,
 .steps-list {
