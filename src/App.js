@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import RecipeForm from './components/RecipeForm/RecipeForm';
 import RecipeIndex from './components/RecipeIndex/RecipeIndex';
 import Recipe from './components/Recipe/Recipe';
+import EditRecipe from './components/EditRecipeForm/EditRecipeForm';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,6 +53,11 @@ function App() {
             isLoggedIn ? <Recipe /> : <Navigate to="/" />
           }
         />
+        <Route 
+          path="/recipes/:id"
+          element= {
+            isLoggedIn ? <EditRecipe /> : <Navigate to="/" />
+          }/>
         {/* catch-all redirect */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -37,6 +37,10 @@ const Recipe = () => {
           console.error('Error deleting recipe:', err);
         }
       };
+
+    const handleEdit = () => {
+      navigate(`/edit-recipe/${id}`);
+    };
   
     if (!recipe) return <p>Loading...</p>;
     /*⬇️ had problem with backward slashes when needing forward ⬇️*/
@@ -45,6 +49,7 @@ const Recipe = () => {
     return (
       <div className="recipe-detail-container">
         <button className="delete-button" onClick={handleDelete}>Delete</button>
+        <button className="edit-button" onClick={handleEdit}>Edit</button>
         <h1 className="recipe-title">{recipe.title}</h1>
         <p className="recipe-description">{recipe.description}</p>
         <p className="recipe-author"><strong>Author:</strong> {recipe.author}</p>
