@@ -54,7 +54,7 @@ function App() {
           }
         />
         <Route 
-          path="/recipes/:id"
+          path="/edit-recipe/:id"
           element= {
             isLoggedIn ? <EditRecipe /> : <Navigate to="/" />
           }/>
