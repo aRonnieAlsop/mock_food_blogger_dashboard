@@ -223,6 +223,43 @@ app.delete('/recipes/:id', (req, res) => {
     });
 });
 
+app.put('/recipes/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, author, description, prepTime, cookTime, ingredients, steps, notes, image } = req.body;
+  const updatedAt = new Date().toISOString();
+
+  const query = `
+    UPDATE recipes
+    SET title = ?, author = ?, description = ?, prepTime = ?, cookTime = ?, ingredients = ?, steps = ?, notes = ?, image = ?, created_at = ?
+    WHERE id = ?
+  `;
+
+  db.run(
+    query,
+    [
+      title,
+      author,
+      description,
+      prepTime,
+      cookTime,
+      ingredients,
+      steps,
+      notes,
+      image,
+      updatedAt,
+      id
+    ],
+    function (err) {
+      if (err) {
+        console.error('Error updating recipe:', err.message);
+        return res.status(500).json({ error: 'Failed to update recipe', details: err.message });
+      }
+      res.status(200).json({ message: 'Recipe updated successfully' });
+    }
+  );
+});
+
+
 app.listen(port, () => {
     console.log(`Server running on localhost:${port}`);
 });
