@@ -186,10 +186,28 @@ textarea {
 }
 
 .checkbox-group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   width: 20px;
   height: 20px;
   margin: 0;
   border: 2px solid #ccc;
   background-color: #fff;
   cursor: pointer;
+  position: relative;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: black;
+  border-color: black;
+}
+
+.checkbox-group input[type="checkbox"]:checked::before {
+  content: "✓";
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  left: 4px;
+  top: 1px;
 }
