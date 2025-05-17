@@ -173,38 +173,23 @@ textarea {
   cursor: pointer;
 }
 
-/* Styling for the checkbox sections */
-.checkbox-section {
-  margin-top: 2rem;
-}
-
-.checkbox-group {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
 .checkbox-group div {
   display: flex;
   align-items: center;
-  gap: 0.5rem;  /* Adjust gap to control space between checkbox and label */
+  gap: 0.5rem;
 }
 
 .checkbox-group label {
   font-size: 1rem;
   font-weight: normal;
-  margin-bottom: 0;  /* Remove any default margin from the label */
+  margin: 0;
 }
 
 .checkbox-group input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  margin-bottom: 0; /* Remove extra margin below the checkbox */
-}
-
-h3 {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid black;
+  margin: 0;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
 }

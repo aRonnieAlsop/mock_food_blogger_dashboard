@@ -202,43 +202,45 @@ export default function RecipeForm() {
                 <button type="button" onClick={addIngredient} className="recipe-form-button">+ Add Ingredient</button>
 
                 {/* "This Recipe is" Section */}
+                <div className="checkbox-group">
                 <h3>This recipe is:</h3>
                 <div>
-                    <input type="checkbox" checked={glutenFree} onChange={(e) => setGlutenFree(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-GF" checked={glutenFree} onChange={(e) => setGlutenFree(e.target.checked)} />
                     <label>Gluten Free</label>
                 </div>
                 <div>
-                    <input type="checkbox" checked={vegan} onChange={(e) => setVegan(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-V" checked={vegan} onChange={(e) => setVegan(e.target.checked)} />
                     <label>Vegan</label>
                 </div>
                 <div>
-                    <input type="checkbox" checked={dairyFree} onChange={(e) => setDairyFree(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-DF" checked={dairyFree} onChange={(e) => setDairyFree(e.target.checked)} />
                     <label>Dairy Free</label>
                 </div>
                 <div>
-                    <input type="checkbox" checked={vegetarian} onChange={(e) => setVegetarian(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-VG" checked={vegetarian} onChange={(e) => setVegetarian(e.target.checked)} />
                     <label>Vegetarian</label>
                 </div>
-
+</div>
                 {/* "Can be easily modified to be" Section */}
+                <div className="checkbox-group">
                 <h3>Can be easily modified to be:</h3>
                 <div>
-                    <input type="checkbox" checked={canBeGlutenFree} onChange={(e) => setCanBeGlutenFree(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-can-be-GF" checked={canBeGlutenFree} onChange={(e) => setCanBeGlutenFree(e.target.checked)} />
                     <label>Gluten Free</label>
                 </div>
                 <div>
-                    <input type="checkbox" checked={canBeVegan} onChange={(e) => setCanBeVegan(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-can-be-V" checked={canBeVegan} onChange={(e) => setCanBeVegan(e.target.checked)} />
                     <label>Vegan</label>
                 </div>
                 <div>
-                    <input type="checkbox" checked={canBeDairyFree} onChange={(e) => setCanBeDairyFree(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-can-be-DF" checked={canBeDairyFree} onChange={(e) => setCanBeDairyFree(e.target.checked)} />
                     <label>Dairy Free</label>
                 </div>
                 <div>
-                    <input type="checkbox" checked={canBeVegetarian} onChange={(e) => setCanBeVegetarian(e.target.checked)} />
+                    <input type="checkbox" className="checkbox-can-be-VG" checked={canBeVegetarian} onChange={(e) => setCanBeVegetarian(e.target.checked)} />
                     <label>Vegetarian</label>
                 </div>
-
+</div>
                 <h3>Notes</h3>
                 <textarea
                     value={notes}
