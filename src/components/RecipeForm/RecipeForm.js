@@ -7,9 +7,7 @@ const US_MEASUREMENTS = ['cup', 'tablespoon', 'teaspoon', 'lb', 'oz', 'pinch', '
 export default function RecipeForm() {
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
-    const [ingredients, setIngredients] = useState([
-        { amount: '', measurement: 'cup', name: '' }
-    ]);
+    const [ingredients, setIngredients] = useState([{ amount: '', measurement: 'cup', name: '' }]);
     const [steps, setSteps] = useState(['']);
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
@@ -19,10 +17,20 @@ export default function RecipeForm() {
     const [image, setImage] = useState(null);
     const [submitted, setSubmitted] = useState(false);
 
+    const [glutenFree, setGlutenFree] = useState(false);
+    const [vegan, setVegan] = useState(false);
+    const [dairyFree, setDairyFree] = useState(false);
+    const [vegetarian, setVegetarian] = useState(false);
+
+   
+    const [canBeGlutenFree, setCanBeGlutenFree] = useState(false);
+    const [canBeVegan, setCanBeVegan] = useState(false);
+    const [canBeDairyFree, setCanBeDairyFree] = useState(false);
+    const [canBeVegetarian, setCanBeVegetarian] = useState(false);
+
     const handleRecipeIndexClick = () => {
         navigate('/recipes');
-      }
-
+    }
 
     const handleIngredientChange = (index, field, value) => {
         const updated = [...ingredients];
@@ -45,7 +53,7 @@ export default function RecipeForm() {
     };
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0]); /* storing the file in state [in backend it creates an /uploads folder on your computer]*/
+        setImage(e.target.files[0]);
     };
 
     const handleSubmit = async (e) => {
@@ -61,6 +69,17 @@ export default function RecipeForm() {
         formData.append('ingredients', JSON.stringify(ingredients)); 
         formData.append('steps', JSON.stringify(steps)); 
         formData.append('notes', notes);
+        
+      
+        formData.append('glutenFree', glutenFree);
+        formData.append('vegan', vegan);
+        formData.append('dairyFree', dairyFree);
+        formData.append('vegetarian', vegetarian);
+
+        formData.append('canBeGlutenFree', canBeGlutenFree);
+        formData.append('canBeVegan', canBeVegan);
+        formData.append('canBeDairyFree', canBeDairyFree);
+        formData.append('canBeVegetarian', canBeVegetarian);
 
         try {
             const res = await fetch('http://localhost:4000/recipes', {
@@ -89,10 +108,9 @@ export default function RecipeForm() {
         setImage(null);
     };
 
-
     return (
         <div className="recipe-form-container">
-             <div className="recipes-idx-link"><button onClick={handleRecipeIndexClick}>Recipe Index</button></div>
+            <div className="recipes-idx-link"><button onClick={handleRecipeIndexClick}>Recipe Index</button></div>
             <form onSubmit={handleSubmit} className="recipe-card">
                 <h2>Recipe Title</h2>
                 <input
@@ -151,7 +169,7 @@ export default function RecipeForm() {
                     </div>
                 </div>
 
-
+                {/* Ingredients Section */}
                 <h3>Ingredients</h3>
                 {ingredients.map((ingredient, index) => (
                     <div className="ingredient-row" key={index}>
@@ -183,19 +201,44 @@ export default function RecipeForm() {
                 ))}
                 <button type="button" onClick={addIngredient} className="recipe-form-button">+ Add Ingredient</button>
 
-                <h3>Instructions</h3>
-                {steps.map((step, index) => (
-                    <div className="step-row" key={index}>
-                        <label>Step {index + 1}</label>
-                        <textarea
-                            value={step}
-                            onChange={(e) => handleStepChange(index, e.target.value)}
-                            placeholder="Describe this step..."
-                            required
-                        />
-                    </div>
-                ))}
-                <button type="button" onClick={addStep} className="recipe-form-button">+ Add Step</button>
+                {/* "This Recipe is" Section */}
+                <h3>This recipe is:</h3>
+                <div>
+                    <input type="checkbox" checked={glutenFree} onChange={(e) => setGlutenFree(e.target.checked)} />
+                    <label>Gluten Free</label>
+                </div>
+                <div>
+                    <input type="checkbox" checked={vegan} onChange={(e) => setVegan(e.target.checked)} />
+                    <label>Vegan</label>
+                </div>
+                <div>
+                    <input type="checkbox" checked={dairyFree} onChange={(e) => setDairyFree(e.target.checked)} />
+                    <label>Dairy Free</label>
+                </div>
+                <div>
+                    <input type="checkbox" checked={vegetarian} onChange={(e) => setVegetarian(e.target.checked)} />
+                    <label>Vegetarian</label>
+                </div>
+
+                {/* "Can be easily modified to be" Section */}
+                <h3>Can be easily modified to be:</h3>
+                <div>
+                    <input type="checkbox" checked={canBeGlutenFree} onChange={(e) => setCanBeGlutenFree(e.target.checked)} />
+                    <label>Gluten Free</label>
+                </div>
+                <div>
+                    <input type="checkbox" checked={canBeVegan} onChange={(e) => setCanBeVegan(e.target.checked)} />
+                    <label>Vegan</label>
+                </div>
+                <div>
+                    <input type="checkbox" checked={canBeDairyFree} onChange={(e) => setCanBeDairyFree(e.target.checked)} />
+                    <label>Dairy Free</label>
+                </div>
+                <div>
+                    <input type="checkbox" checked={canBeVegetarian} onChange={(e) => setCanBeVegetarian(e.target.checked)} />
+                    <label>Vegetarian</label>
+                </div>
+
                 <h3>Notes</h3>
                 <textarea
                     value={notes}
@@ -208,10 +251,8 @@ export default function RecipeForm() {
                     <input type="file" accept="image/*" onChange={handleImageChange} />
                 </div>
 
-
                 <button type="submit" className="recipe-form-button">Submit Recipe</button>
             </form>
-
 
             {submitted && (
                 <div className="modal-overlay">
@@ -221,7 +262,6 @@ export default function RecipeForm() {
                     </div>
                 </div>
             )}
-
         </div>
     );
 }
