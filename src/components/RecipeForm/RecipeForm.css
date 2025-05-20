@@ -204,9 +204,9 @@ textarea {
 }
 
 .checkbox-group input[type="checkbox"]:checked::before {
-  content: "✓";
+  content: "✔";
   color: white;
-  font-size: 16px;
+  font-size: 10px;
   position: absolute;
   left: 4px;
   top: 1px;
