@@ -17,10 +17,10 @@ export default function RecipeForm() {
     const [image, setImage] = useState(null);
     const [submitted, setSubmitted] = useState(false);
 
-    const [glutenFree, setGlutenFree] = useState(false);
-    const [vegan, setVegan] = useState(false);
-    const [dairyFree, setDairyFree] = useState(false);
-    const [vegetarian, setVegetarian] = useState(false);
+    const [isGlutenFree, setGlutenFree] = useState(false);
+    const [isVegan, setVegan] = useState(false);
+    const [isDairyFree, setDairyFree] = useState(false);
+    const [isVegetarian, setVegetarian] = useState(false);
 
 
     const [canBeGlutenFree, setCanBeGlutenFree] = useState(false);
@@ -205,19 +205,19 @@ export default function RecipeForm() {
                 <div className="checkbox-group">
                     <h3>This recipe is:</h3>
                     <div>
-                        <input type="checkbox" className="checkbox-GF" checked={glutenFree} onChange={(e) => setGlutenFree(e.target.checked)} />
+                        <input type="checkbox" className="checkbox-GF" checked={isGlutenFree} onChange={(e) => setGlutenFree(e.target.checked)} />
                         <label>Gluten Free</label>
                     </div>
                     <div>
-                        <input type="checkbox" className="checkbox-V" checked={vegan} onChange={(e) => setVegan(e.target.checked)} />
+                        <input type="checkbox" className="checkbox-V" checked={isVegan} onChange={(e) => setVegan(e.target.checked)} />
                         <label>Vegan</label>
                     </div>
                     <div>
-                        <input type="checkbox" className="checkbox-DF" checked={dairyFree} onChange={(e) => setDairyFree(e.target.checked)} />
+                        <input type="checkbox" className="checkbox-DF" checked={isDairyFree} onChange={(e) => setDairyFree(e.target.checked)} />
                         <label>Dairy Free</label>
                     </div>
                     <div>
-                        <input type="checkbox" className="checkbox-VG" checked={vegetarian} onChange={(e) => setVegetarian(e.target.checked)} />
+                        <input type="checkbox" className="checkbox-VG" checked={isVegetarian} onChange={(e) => setVegetarian(e.target.checked)} />
                         <label>Vegetarian</label>
                     </div>
                 </div>
