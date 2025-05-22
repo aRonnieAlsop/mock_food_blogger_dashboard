@@ -22,7 +22,7 @@ export default function RecipeForm() {
     const [dairyFree, setDairyFree] = useState(false);
     const [vegetarian, setVegetarian] = useState(false);
 
-   
+
     const [canBeGlutenFree, setCanBeGlutenFree] = useState(false);
     const [canBeVegan, setCanBeVegan] = useState(false);
     const [canBeDairyFree, setCanBeDairyFree] = useState(false);
@@ -60,36 +60,36 @@ export default function RecipeForm() {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('image', image); 
+        formData.append('image', image);
         formData.append('title', title);
         formData.append('author', author);
         formData.append('description', description);
         formData.append('prepTime', prepTime);
         formData.append('cookTime', cookTime);
-        formData.append('ingredients', JSON.stringify(ingredients)); 
-        formData.append('steps', JSON.stringify(steps)); 
+        formData.append('ingredients', JSON.stringify(ingredients));
+        formData.append('steps', JSON.stringify(steps));
         formData.append('notes', notes);
-        
-      
-        formData.append('glutenFree', glutenFree);
-        formData.append('vegan', vegan);
-        formData.append('dairyFree', dairyFree);
-        formData.append('vegetarian', vegetarian);
 
-        formData.append('canBeGlutenFree', canBeGlutenFree);
-        formData.append('canBeVegan', canBeVegan);
-        formData.append('canBeDairyFree', canBeDairyFree);
-        formData.append('canBeVegetarian', canBeVegetarian);
+
+        formData.append('is_gluten_free', isGlutenFree ? 'YES' : 'N/A');
+        formData.append('is_vegan', isVegan ? 'YES' : 'N/A');
+        formData.append('is_dairy_free', isDairyFree ? 'YES' : 'N/A');
+        formData.append('is_vegetarian', isVegetarian ? 'YES' : 'N/A');
+        formData.append('can_be_gluten_free', canBeGlutenFree ? 'YES' : 'N/A');
+        formData.append('can_be_vegan', canBeVegan ? 'YES' : 'N/A');
+        formData.append('can_be_dairy_free', canBeDairyFree ? 'YES' : 'N/A');
+        formData.append('can_be_vegetarian', canBeVegetarian ? 'YES' : 'N/A');
+
 
         try {
             const res = await fetch('http://localhost:4000/recipes', {
                 method: 'POST',
-                body: formData, 
+                body: formData,
             });
 
             const data = await res.json();
             console.log('Saved to DB:', data);
-            setSubmitted(true); 
+            setSubmitted(true);
         } catch (err) {
             console.error('Failed to save recipe:', err);
         }
@@ -203,44 +203,44 @@ export default function RecipeForm() {
 
                 {/* "This Recipe is" Section */}
                 <div className="checkbox-group">
-                <h3>This recipe is:</h3>
-                <div>
-                    <input type="checkbox" className="checkbox-GF" checked={glutenFree} onChange={(e) => setGlutenFree(e.target.checked)} />
-                    <label>Gluten Free</label>
+                    <h3>This recipe is:</h3>
+                    <div>
+                        <input type="checkbox" className="checkbox-GF" checked={glutenFree} onChange={(e) => setGlutenFree(e.target.checked)} />
+                        <label>Gluten Free</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="checkbox-V" checked={vegan} onChange={(e) => setVegan(e.target.checked)} />
+                        <label>Vegan</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="checkbox-DF" checked={dairyFree} onChange={(e) => setDairyFree(e.target.checked)} />
+                        <label>Dairy Free</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="checkbox-VG" checked={vegetarian} onChange={(e) => setVegetarian(e.target.checked)} />
+                        <label>Vegetarian</label>
+                    </div>
                 </div>
-                <div>
-                    <input type="checkbox" className="checkbox-V" checked={vegan} onChange={(e) => setVegan(e.target.checked)} />
-                    <label>Vegan</label>
-                </div>
-                <div>
-                    <input type="checkbox" className="checkbox-DF" checked={dairyFree} onChange={(e) => setDairyFree(e.target.checked)} />
-                    <label>Dairy Free</label>
-                </div>
-                <div>
-                    <input type="checkbox" className="checkbox-VG" checked={vegetarian} onChange={(e) => setVegetarian(e.target.checked)} />
-                    <label>Vegetarian</label>
-                </div>
-</div>
                 {/* "Can be easily modified to be" Section */}
                 <div className="checkbox-group">
-                <h3>Can be easily modified to be:</h3>
-                <div>
-                    <input type="checkbox" className="checkbox-can-be-GF" checked={canBeGlutenFree} onChange={(e) => setCanBeGlutenFree(e.target.checked)} />
-                    <label>Gluten Free</label>
+                    <h3>Can be easily modified to be:</h3>
+                    <div>
+                        <input type="checkbox" className="checkbox-can-be-GF" checked={canBeGlutenFree} onChange={(e) => setCanBeGlutenFree(e.target.checked)} />
+                        <label>Gluten Free</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="checkbox-can-be-V" checked={canBeVegan} onChange={(e) => setCanBeVegan(e.target.checked)} />
+                        <label>Vegan</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="checkbox-can-be-DF" checked={canBeDairyFree} onChange={(e) => setCanBeDairyFree(e.target.checked)} />
+                        <label>Dairy Free</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" className="checkbox-can-be-VG" checked={canBeVegetarian} onChange={(e) => setCanBeVegetarian(e.target.checked)} />
+                        <label>Vegetarian</label>
+                    </div>
                 </div>
-                <div>
-                    <input type="checkbox" className="checkbox-can-be-V" checked={canBeVegan} onChange={(e) => setCanBeVegan(e.target.checked)} />
-                    <label>Vegan</label>
-                </div>
-                <div>
-                    <input type="checkbox" className="checkbox-can-be-DF" checked={canBeDairyFree} onChange={(e) => setCanBeDairyFree(e.target.checked)} />
-                    <label>Dairy Free</label>
-                </div>
-                <div>
-                    <input type="checkbox" className="checkbox-can-be-VG" checked={canBeVegetarian} onChange={(e) => setCanBeVegetarian(e.target.checked)} />
-                    <label>Vegetarian</label>
-                </div>
-</div>
                 <h3>Notes</h3>
                 <textarea
                     value={notes}
