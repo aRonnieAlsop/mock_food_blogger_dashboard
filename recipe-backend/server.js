@@ -165,8 +165,8 @@ app.post('/recipes', upload.single('image'), (req, res) => {
 
           
             const query = `
-                INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at, is_gluten_free, is_vegan, is_dairy_free, is_vegetarian, can_be_gluten_free, can_be_vegan, can_be_dairy_free, can_be_vegetarian)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             `;
 
             db.run(
@@ -181,7 +181,15 @@ app.post('/recipes', upload.single('image'), (req, res) => {
                     JSON.stringify(steps),
                     notes,
                     compressedImagePath, 
-                    createdAt
+                    createdAt,
+                    isGlutenFree ? 'YES' : 'N/A',
+                      isVegan ? 'YES' : 'N/A',
+                      isDairyFree ? 'YES' : 'N/A',
+                      isVegetarian ? 'YES' : 'N/A',
+                      canBeGlutenFree ? 'YES' : 'N/A',
+                      canBeVegan ? 'YES' : 'N/A',
+                      canBeDairyFree ? 'YES' : 'N/A',
+                      canBeVegetarian ? 'YES' : 'N/A',
                 ],
                 function (err) {
                     if (err) {
@@ -230,7 +238,7 @@ app.put('/recipes/:id', (req, res) => {
 
   const query = `
     UPDATE recipes
-    SET title = ?, author = ?, description = ?, prepTime = ?, cookTime = ?, ingredients = ?, steps = ?, notes = ?, image = ?, created_at = ?
+    SET title = ?, author = ?, description = ?, prepTime = ?, cookTime = ?, ingredients = ?, steps = ?, notes = ?, image = ?, is_gluten_free = ?, is_vegan = ?, is_dairy_free = ?, is_vegetarian = ?, can_be_gluten_free = ?, can_be_vegan = ?, can_be_dairy_free = ?, can_be_vegetarian = ?
     WHERE id = ?
   `;
 
@@ -247,7 +255,15 @@ app.put('/recipes/:id', (req, res) => {
       notes,
       image,
       updatedAt,
-      id
+      id,
+      isGlutenFree ? 'YES' : 'N/A',
+              isVegan ? 'YES' : 'N/A',
+              isDairyFree ? 'YES' : 'N/A',
+              isVegetarian ? 'YES' : 'N/A',
+              canBeGlutenFree ? 'YES' : 'N/A',
+              canBeVegan ? 'YES' : 'N/A',
+              canBeDairyFree ? 'YES' : 'N/A',
+              canBeVegetarian ? 'YES' : 'N/A',
     ],
     function (err) {
       if (err) {
