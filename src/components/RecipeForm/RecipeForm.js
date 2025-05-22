@@ -200,7 +200,19 @@ export default function RecipeForm() {
                     </div>
                 ))}
                 <button type="button" onClick={addIngredient} className="recipe-form-button">+ Add Ingredient</button>
-
+                                <h3>Instructions</h3>
+                {steps.map((step, index) => (
+                    <div className="step-row" key={index}>
+                        <label>Step {index + 1}</label>
+                        <textarea
+                            value={step}
+                            onChange={(e) => handleStepChange(index, e.target.value)}
+                            placeholder="Describe this step..."
+                            required
+                        />
+                    </div>
+                ))}
+                <button type="button" onClick={addStep} className="recipe-form-button">+ Add Step</button>
                 {/* "This Recipe is" Section */}
                 <div className="checkbox-group">
                     <h3>This recipe is:</h3>
