@@ -51,13 +51,21 @@ db.run(`
         steps TEXT,
         notes TEXT,
         image TEXT,
-        created_at TEXT
+        created_at TEXT,
+        is_gluten_free TEXT,
+        is_vegan TEXT,
+        is_dairy_free TEXT,
+        is_vegetarian TEXT,
+        can_be_gluten_free TEXT,
+        can_be_vegan TEXT,
+        can_be_dairy_free TEXT,
+        can_be_vegetarian TEXT
     )`
 );
 
 // POST endpoint for recipe submission (with image upload and compression)
 app.post('/recipes', upload.single('image'), (req, res) => {
-  const { title, author, description, prepTime, cookTime, ingredients, steps, notes } = req.body;
+  const { title, author, description, prepTime, cookTime, ingredients, steps, notes, is_gluten_free, is_vegan, is_dairy_free, is_vegetarian, can_be_gluten_free, can_be_vegan, can_be_dairy_free, can_be_vegetarian } = req.body;
   const createdAt = new Date().toISOString();
 
   const imagePath = req.file ? path.join('uploads', req.file.filename) : null;
@@ -75,13 +83,11 @@ app.post('/recipes', upload.single('image'), (req, res) => {
               }
 
               // Optionally, delete the original image
-              fs.unlinkSync(req.file.path); 
-
-              console.log('Image saved at:', compressedImagePath);  // Debugging to verify the image path
+              fs.unlinkSync(req.file.path);
 
               const query = `
-                  INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                  INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at, is_gluten_free, is_vegan, is_dairy_free, is_vegetarian, can_be_gluten_free, can_be_vegan, can_be_dairy_free, can_be_vegetarian)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
               `;
 
               db.run(
@@ -96,7 +102,15 @@ app.post('/recipes', upload.single('image'), (req, res) => {
                       JSON.stringify(steps),
                       notes,
                       compressedImagePath, 
-                      createdAt
+                      createdAt,
+                      is_gluten_free ? 'YES' : 'N/A',
+                      is_vegan ? 'YES' : 'N/A',
+                      is_dairy_free ? 'YES' : 'N/A',
+                      is_vegetarian ? 'YES' : 'N/A',
+                      can_be_gluten_free ? 'YES' : 'N/A',
+                      can_be_vegan ? 'YES' : 'N/A',
+                      can_be_dairy_free ? 'YES' : 'N/A',
+                      can_be_vegetarian ? 'YES' : 'N/A'
                   ],
                   function (err) {
                       if (err) {
@@ -110,8 +124,8 @@ app.post('/recipes', upload.single('image'), (req, res) => {
   } else {
       // If no image is uploaded, just save the recipe without the image
       const query = `
-          INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at, is_gluten_free, is_vegan, is_dairy_free, is_vegetarian, can_be_gluten_free, can_be_vegan, can_be_dairy_free, can_be_vegetarian)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
 
       db.run(
@@ -126,7 +140,15 @@ app.post('/recipes', upload.single('image'), (req, res) => {
               JSON.stringify(steps),
               notes,
               null,  // No image if none was uploaded
-              createdAt
+              createdAt,
+              is_gluten_free ? 'YES' : 'N/A',
+              is_vegan ? 'YES' : 'N/A',
+              is_dairy_free ? 'YES' : 'N/A',
+              is_vegetarian ? 'YES' : 'N/A',
+              can_be_gluten_free ? 'YES' : 'N/A',
+              can_be_vegan ? 'YES' : 'N/A',
+              can_be_dairy_free ? 'YES' : 'N/A',
+              can_be_vegetarian ? 'YES' : 'N/A'
           ],
           function (err) {
               if (err) {
@@ -138,70 +160,6 @@ app.post('/recipes', upload.single('image'), (req, res) => {
       );
   }
 });
-
-app.post('/recipes', upload.single('image'), (req, res) => {
-    const { title, author, description, prepTime, cookTime, ingredients, steps, notes } = req.body;
-    const createdAt = new Date().toISOString();
-
-    if (!req.file) {
-        return res.status(400).json({ error: 'No image uploaded' });
-    }
-
-
-    const imagePath = path.join('uploads', req.file.filename); 
-
-    
-    const compressedImagePath = path.join('uploads', 'compressed_' + req.file.filename);
-
-    sharp(req.file.path)
-        .resize(800) 
-        .toFile(compressedImagePath, (err, info) => {
-            if (err) {
-                console.error('Error compressing image:', err);
-                return res.status(500).json({ error: 'Failed to compress image', details: err.message });
-            }
-
-            fs.unlinkSync(req.file.path);
-
-          
-            const query = `
-                INSERT INTO recipes (title, author, description, prepTime, cookTime, ingredients, steps, notes, image, created_at, is_gluten_free, is_vegan, is_dairy_free, is_vegetarian, can_be_gluten_free, can_be_vegan, can_be_dairy_free, can_be_vegetarian)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            `;
-
-            db.run(
-                query,
-                [
-                    title,
-                    author,
-                    description,
-                    prepTime,
-                    cookTime,
-                    JSON.stringify(ingredients),
-                    JSON.stringify(steps),
-                    notes,
-                    compressedImagePath, 
-                    createdAt,
-                    isGlutenFree ? 'YES' : 'N/A',
-                      isVegan ? 'YES' : 'N/A',
-                      isDairyFree ? 'YES' : 'N/A',
-                      isVegetarian ? 'YES' : 'N/A',
-                      canBeGlutenFree ? 'YES' : 'N/A',
-                      canBeVegan ? 'YES' : 'N/A',
-                      canBeDairyFree ? 'YES' : 'N/A',
-                      canBeVegetarian ? 'YES' : 'N/A',
-                ],
-                function (err) {
-                    if (err) {
-                        console.error('Error saving recipe:', err.message);
-                        return res.status(500).json({ error: 'Failed to save recipe', details: err.message });
-                    }
-                    res.status(200).json({ message: 'Recipe saved successfully', id: this.lastID });
-                }
-            );
-        });
-});
-
 
 // GET endpoint for fetching all recipes
 app.get('/recipes', (req, res) => {
@@ -230,51 +188,6 @@ app.delete('/recipes/:id', (req, res) => {
         res.json({ success: true, deletedId: id });
     });
 });
-
-app.put('/recipes/:id', (req, res) => {
-  const { id } = req.params;
-  const { title, author, description, prepTime, cookTime, ingredients, steps, notes, image } = req.body;
-  const updatedAt = new Date().toISOString();
-
-  const query = `
-    UPDATE recipes
-    SET title = ?, author = ?, description = ?, prepTime = ?, cookTime = ?, ingredients = ?, steps = ?, notes = ?, image = ?, is_gluten_free = ?, is_vegan = ?, is_dairy_free = ?, is_vegetarian = ?, can_be_gluten_free = ?, can_be_vegan = ?, can_be_dairy_free = ?, can_be_vegetarian = ?
-    WHERE id = ?
-  `;
-
-  db.run(
-    query,
-    [
-      title,
-      author,
-      description,
-      prepTime,
-      cookTime,
-      ingredients,
-      steps,
-      notes,
-      image,
-      updatedAt,
-      id,
-      isGlutenFree ? 'YES' : 'N/A',
-              isVegan ? 'YES' : 'N/A',
-              isDairyFree ? 'YES' : 'N/A',
-              isVegetarian ? 'YES' : 'N/A',
-              canBeGlutenFree ? 'YES' : 'N/A',
-              canBeVegan ? 'YES' : 'N/A',
-              canBeDairyFree ? 'YES' : 'N/A',
-              canBeVegetarian ? 'YES' : 'N/A',
-    ],
-    function (err) {
-      if (err) {
-        console.error('Error updating recipe:', err.message);
-        return res.status(500).json({ error: 'Failed to update recipe', details: err.message });
-      }
-      res.status(200).json({ message: 'Recipe updated successfully' });
-    }
-  );
-});
-
 
 app.listen(port, () => {
     console.log(`Server running on localhost:${port}`);
