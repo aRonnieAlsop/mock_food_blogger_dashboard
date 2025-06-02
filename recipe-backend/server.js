@@ -191,6 +191,9 @@ app.get('/recipes', (req, res) => {
 });
 
 app.post('/recipes', upload.single('image'), (req, res) => {
+    console.log('Received POST /recipes');
+console.log('req.body:', req.body);
+console.log('req.file:', req.file);
     const { title, author, description, prepTime, cookTime, ingredients, steps, notes } = req.body;
     const createdAt = new Date().toISOString();
 
@@ -252,7 +255,6 @@ app.post('/recipes', upload.single('image'), (req, res) => {
             );
         });
 });
-
 // DELETE endpoint for deleting a recipe by ID
 app.delete('/recipes/:id', (req, res) => {
     const id = req.params.id;
