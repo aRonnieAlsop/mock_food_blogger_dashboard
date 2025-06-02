@@ -63,31 +63,35 @@ const EditRecipe = () => {
     setRecipe({ ...recipe, steps: updated });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const updatedRecipe = {
-      ...recipe,
-      ingredients: JSON.stringify(recipe.ingredients),
-      steps: JSON.stringify(recipe.steps)
-    };
-
-    try {
-      const res = await fetch(`http://localhost:4000/recipes/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedRecipe)
-      });
-
-      if (res.ok) {
-        navigate(`/recipes/${id}`); // Redirect back to the recipe details page
-      } else {
-        console.error('Failed to update recipe.');
-      }
-    } catch (err) {
-      console.error('Error updating recipe:', err);
-    }
+  const updatedRecipe = {
+    ...recipe,
+    ingredients: JSON.stringify(recipe.ingredients),
+    steps: JSON.stringify(recipe.steps),
   };
+
+  try {
+    const res = await fetch(`http://localhost:4000/recipes/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedRecipe),
+    });
+
+    const data = await res.json();
+    console.log('Response:', res.status, data);
+
+    if (res.ok) {
+      navigate(`/recipes/${id}`);
+    } else {
+      console.error('Failed to update recipe.');
+    }
+  } catch (err) {
+    console.error('Error updating recipe:', err);
+  }
+};
+
 
   if (!recipe) return <p>Loading...</p>;
 
