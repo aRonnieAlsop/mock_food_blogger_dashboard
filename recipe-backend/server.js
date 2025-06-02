@@ -255,6 +255,7 @@ console.log('req.file:', req.file);
             );
         });
 });
+
 // DELETE endpoint for deleting a recipe by ID
 app.delete('/recipes/:id', (req, res) => {
     const id = req.params.id;

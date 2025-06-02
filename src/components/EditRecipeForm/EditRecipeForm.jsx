@@ -66,11 +66,12 @@ const EditRecipe = () => {
  const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const updatedRecipe = {
-    ...recipe,
-    ingredients: JSON.stringify(recipe.ingredients),
-    steps: JSON.stringify(recipe.steps),
-  };
+ const updatedRecipe = {
+  ...recipe,
+  ingredients: JSON.stringify(recipe.ingredients),
+  steps: JSON.stringify(recipe.steps),
+};
+
 
   try {
     const res = await fetch(`http://localhost:4000/recipes/${id}`, {
