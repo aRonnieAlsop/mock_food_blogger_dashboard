@@ -171,6 +171,93 @@ const EditRecipe = () => {
           </div>
         ))}
         <button type="button" onClick={addStep}>+ Add Step</button>
+        <div className="checkbox-group">
+  <h3>This recipe is:</h3>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.is_gluten_free === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, is_gluten_free: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Gluten Free</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.is_vegan === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, is_vegan: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Vegan</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.is_dairy_free === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, is_dairy_free: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Dairy Free</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.is_vegetarian === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, is_vegetarian: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Vegetarian</label>
+  </div>
+</div>
+
+<div className="checkbox-group">
+  <h3>Can be easily modified to be:</h3>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.can_be_gluten_free === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, can_be_gluten_free: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Gluten Free</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.can_be_vegan === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, can_be_vegan: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Vegan</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.can_be_dairy_free === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, can_be_dairy_free: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Dairy Free</label>
+  </div>
+  <div>
+    <input
+      type="checkbox"
+      checked={recipe.can_be_vegetarian === 'YES'}
+      onChange={(e) =>
+        setRecipe({ ...recipe, can_be_vegetarian: e.target.checked ? 'YES' : 'N/A' })
+      }
+    />
+    <label>Vegetarian</label>
+  </div>
+</div>
 
         <h3>Notes</h3>
         <textarea
