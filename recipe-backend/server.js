@@ -267,6 +267,68 @@ app.delete('/recipes/:id', (req, res) => {
     });
 });
 
+app.put('/recipes/:id', (req, res) => {
+  const {
+    title,
+    author,
+    description,
+    prepTime,
+    cookTime,
+    ingredients,
+    steps,
+    notes,
+    is_gluten_free,
+    is_vegan,
+    is_dairy_free,
+    is_vegetarian,
+    can_be_gluten_free,
+    can_be_vegan,
+    can_be_dairy_free,
+    can_be_vegetarian
+  } = req.body;
+
+  const id = req.params.id;
+
+  const query = `
+    UPDATE recipes
+    SET title = ?, author = ?, description = ?, prepTime = ?, cookTime = ?, ingredients = ?, steps = ?, notes = ?,
+        is_gluten_free = ?, is_vegan = ?, is_dairy_free = ?, is_vegetarian = ?,
+        can_be_gluten_free = ?, can_be_vegan = ?, can_be_dairy_free = ?, can_be_vegetarian = ?
+    WHERE id = ?
+  `;
+
+  db.run(
+    query,
+    [
+      title,
+      author,
+      description,
+      prepTime,
+      cookTime,
+      ingredients,
+      steps,
+      notes,
+      is_gluten_free,
+      is_vegan,
+      is_dairy_free,
+      is_vegetarian,
+      can_be_gluten_free,
+      can_be_vegan,
+      can_be_dairy_free,
+      can_be_vegetarian,
+      id
+    ],
+    function (err) {
+      if (err) {
+        console.error('Error updating recipe:', err.message);
+        return res.status(500).json({ error: 'Failed to update recipe', details: err.message });
+      }
+      res.json({ message: 'Recipe updated successfully' });
+    }
+  );
+});
+
+
 app.listen(port, () => {
     console.log(`Server running on localhost:${port}`);
 });
