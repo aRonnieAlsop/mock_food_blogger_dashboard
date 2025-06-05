@@ -290,6 +290,10 @@ app.put('/recipes/:id', (req, res) => {
 
   const id = req.params.id;
 
+  // Make sure ingredients and steps are strings (not double-stringified)
+  const ingredientsString = typeof ingredients === 'string' ? ingredients : JSON.stringify(ingredients);
+  const stepsString = typeof steps === 'string' ? steps : JSON.stringify(steps);
+
   const query = `
     UPDATE recipes
     SET title = ?, author = ?, description = ?, prepTime = ?, cookTime = ?, ingredients = ?, steps = ?, notes = ?,
@@ -306,8 +310,8 @@ app.put('/recipes/:id', (req, res) => {
       description,
       prepTime,
       cookTime,
-      ingredients,
-      steps,
+      ingredientsString,
+      stepsString,
       notes,
       is_gluten_free,
       is_vegan,
@@ -328,6 +332,7 @@ app.put('/recipes/:id', (req, res) => {
     }
   );
 });
+
 
 
 app.listen(port, () => {

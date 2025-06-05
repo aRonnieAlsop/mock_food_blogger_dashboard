@@ -74,24 +74,32 @@ useEffect(() => {
 };
 
 
-  try {
-    const res = await fetch(`http://localhost:4000/recipes/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedRecipe),
-    });
+try {
+  const res = await fetch(`http://localhost:4000/recipes/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedRecipe),
+  });
 
+  const contentType = res.headers.get('content-type');
+
+  if (contentType && contentType.includes('application/json')) {
     const data = await res.json();
     console.log('Response:', res.status, data);
 
     if (res.ok) {
       navigate(`/recipes/${id}`);
     } else {
-      console.error('Failed to update recipe.');
+      console.error('Failed to update recipe:', data);
     }
-  } catch (err) {
-    console.error('Error updating recipe:', err);
+  } else {
+    const text = await res.text();
+    console.error('Unexpected response format:', text);
   }
+} catch (err) {
+  console.error('Error updating recipe:', err);
+}
+
 };
 
 
