@@ -17,18 +17,19 @@ const EditRecipe = () => {
     image: null
   });
 
-  useEffect(() => {
-    fetch(`http://localhost:4000/recipes`)
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.find((r) => r.id === parseInt(id));
-        if (found) {
-          found.ingredients = JSON.parse(found.ingredients);
-          found.steps = JSON.parse(found.steps);
-          setRecipe(found);
-        }
-      });
-  }, [id]);
+useEffect(() => {
+  fetch(`http://localhost:4000/recipes`)
+    .then((res) => res.json())
+    .then((data) => {
+      const found = data.find((r) => r.id === parseInt(id));
+      if (found) {
+        found.ingredients = typeof found.ingredients === 'string' ? JSON.parse(found.ingredients) : found.ingredients;
+        found.steps = typeof found.steps === 'string' ? JSON.parse(found.steps) : found.steps;
+        setRecipe(found);
+      }
+    });
+}, [id]);
+
 
   const handleIngredientChange = (index, field, value) => {
     const updated = [...recipe.ingredients];
