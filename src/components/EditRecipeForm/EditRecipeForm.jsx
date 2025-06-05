@@ -66,12 +66,14 @@ useEffect(() => {
 
  const handleSubmit = async (e) => {
   e.preventDefault();
+console.log('About to send:', updatedRecipe);
 
- const updatedRecipe = {
+const updatedRecipe = {
   ...recipe,
-  ingredients: JSON.stringify(recipe.ingredients),
-  steps: JSON.stringify(recipe.steps),
+  ingredients: typeof recipe.ingredients === 'string' ? recipe.ingredients : JSON.stringify(recipe.ingredients),
+  steps: typeof recipe.steps === 'string' ? recipe.steps : JSON.stringify(recipe.steps),
 };
+
 
 
 try {
