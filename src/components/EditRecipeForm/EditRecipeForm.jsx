@@ -66,42 +66,35 @@ useEffect(() => {
 
  const handleSubmit = async (e) => {
   e.preventDefault();
-console.log('About to send:', updatedRecipe);
 
-const updatedRecipe = {
+ const updatedRecipe = {
   ...recipe,
-  ingredients: typeof recipe.ingredients === 'string' ? recipe.ingredients : JSON.stringify(recipe.ingredients),
-  steps: typeof recipe.steps === 'string' ? recipe.steps : JSON.stringify(recipe.steps),
+  ingredients: JSON.stringify(recipe.ingredients),
+  steps: JSON.stringify(recipe.steps),
 };
 
 
+  try {
+    const res = await fetch(`http://localhost:4000/recipes/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedRecipe),
+    });
 
-try {
-  const res = await fetch(`http://localhost:4000/recipes/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(updatedRecipe),
-  });
+    const contentType = res.headers.get("content-type");
+    console.log("Response content-type:", contentType);
 
-  const contentType = res.headers.get('content-type');
-
-  if (contentType && contentType.includes('application/json')) {
     const data = await res.json();
     console.log('Response:', res.status, data);
 
     if (res.ok) {
       navigate(`/recipes/${id}`);
     } else {
-      console.error('Failed to update recipe:', data);
+      console.error('Failed to update recipe.');
     }
-  } else {
-    const text = await res.text();
-    console.error('Unexpected response format:', text);
+  } catch (err) {
+    console.error('Error updating recipe:', err);
   }
-} catch (err) {
-  console.error('Error updating recipe:', err);
-}
-
 };
 
 

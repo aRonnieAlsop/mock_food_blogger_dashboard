@@ -13,16 +13,23 @@ const Recipe = () => {
       .then(data => {
         const found = data.find((r) => r.id === parseInt(id));
         if (found) {
-          found.ingredients = typeof found.ingredients === 'string'
-            ? JSON.parse(found.ingredients)
-            : found.ingredients;
+          try {
+            found.ingredients = typeof found.ingredients === 'string'
+              ? JSON.parse(found.ingredients)
+              : found.ingredients;
 
-          found.steps = typeof found.steps === 'string'
-            ? JSON.parse(found.steps)
-            : found.steps;
+            found.steps = typeof found.steps === 'string'
+              ? JSON.parse(found.steps)
+              : found.steps;
+          } catch (error) {
+            console.error('Error parsing ingredients or steps:', error);
+          }
         }
 
         setRecipe(found);
+      })
+      .catch(err => {
+        console.error('Error fetching recipe:', err);
       });
   }, [id]);
 
@@ -35,7 +42,7 @@ const Recipe = () => {
       });
 
       if (res.ok) {
-        navigate('/'); // ➡️ return to index of recipes
+        navigate('/');
       } else {
         console.error('Failed to delete recipe.');
       }
@@ -48,12 +55,16 @@ const Recipe = () => {
     navigate(`/edit-recipe/${id}`);
   };
 
+  const handleBack = () => {
+    navigate('/recipes');
+  };
+
   if (!recipe) return <p>Loading...</p>;
-  /*⬇️ had problem with backward slashes when needing forward ⬇️*/
   const imageURL = recipe.image ? `http://localhost:4000/${recipe.image.replace(/\\/g, '/')}` : null;
 
   return (
     <div className="recipe-detail-container">
+      <button className="back-button" onClick={handleBack}>Back</button>
       <button className="delete-button" onClick={handleDelete}>Delete</button>
       <button className="edit-button" onClick={handleEdit}>Edit</button>
       <h1 className="recipe-title">{recipe.title}</h1>
@@ -71,7 +82,6 @@ const Recipe = () => {
         </div>
       </div>
 
-      {/* Display Image */}
       {imageURL && (
         <div className="recipe-image">
           <img src={imageURL} alt={recipe.title} />
